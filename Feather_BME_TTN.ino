@@ -213,7 +213,9 @@ void do_send(osjob_t *j)
     byte tempHigh = highByte(payloadTemp);
     payload[0] = tempLow;
     payload[1] = tempHigh;
-
+    // 0x8543 = 0x85, 0x43
+    // MSB: [0x85, 0x43]
+    // LSB: [0x43, 0x85]
     uint16_t payloadHum = LMIC_f2sflt16(rHumidity);
     byte humLow = lowByte(payloadHum);
     byte humHigh = highByte(payloadHum);

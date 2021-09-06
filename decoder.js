@@ -2,6 +2,13 @@ function decodeUplink(input) {
   var highT = input.bytes[1];
   var lowT = input.bytes[0];
   var encTemp = ((highT & 0xff) << 8) | (lowT & 0xff);
+  // assume highT = 0x85, lowT = 0x43
+  // highT & 0xff = 1000 0101 & 1111 1111
+  // lowT & 0xff =  0100 0011 & 1111 1111
+  // highTNew = 1000 0101 0000 0000 = 0x8500
+  // lowTNew =  0000 0000 0100 0011 = 0x0043
+  // encTemp =  1000 0101 0100 0011 = 0x8543
+  // encTemp = highTNew | lowTNew
   var highH = input.bytes[3];
   var lowH = input.bytes[2];
   var encHum = ((highH & 0xff) << 8) | (lowH & 0xff);
